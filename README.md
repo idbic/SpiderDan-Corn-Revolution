@@ -45,4 +45,6 @@ problem - how to house the game.
 
 problem - upload to dbic.io
 
+problem - using math.randow to randomly generate corn and redbulls corn more frequently and redbulls have longer spawn time
+
 
