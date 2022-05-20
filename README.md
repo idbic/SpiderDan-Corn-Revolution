@@ -37,4 +37,12 @@ problem - style the game last function first.
 
 problem - use both mouse move over and arrow keys to control spiderdan 
 
-problem -  
+problem - life bar that goes down when you hit corn. 
+
+problem - keeping spiderdan on the building 
+
+problem - how to house the game. 
+
+problem - upload to dbic.io
+
+
