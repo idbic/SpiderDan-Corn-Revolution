@@ -20,13 +20,20 @@ class Hero {
         this.height = height; 
         this.width = width; 
         this.alive = true; 
+        this.speed = 20;
     }
-
+// added this.speed and jergins move function to this class
     render(){
         ctx.fillStyle = this.color;
         ctx.fillRect(this.x, this.y, this.width, this.height)
     }
-    
+    move() {
+		this.y += this.speed;
+    	if(this.y === 1000){
+    		this.y = 0
+    		this.x = (Math.random() * 250);
+    	}
+  	}
 }
 
 
@@ -50,8 +57,9 @@ function gameLoop(){
 
     hero.render();
     corn.render();
+    corn.move();
 }
-
+//added the corn move method/function 
 function movementHandler(e){
     console.log("the key that was pressed was: " + e.key);
 
@@ -88,7 +96,7 @@ game.height = 850
 
 //render falling objects using modifying lecture function
 
-function fallingCorn() {
+function fallingCornGen() {
     corn.alive = false;
     setTimeout(function(){
         let x = Math.floor(Math.random() * game.width) - 40;
@@ -96,4 +104,6 @@ function fallingCorn() {
         corn = new Hero(x, y, "#ffff00", 250, 75)
     }, 1000)
     return true;
+
 }
+
