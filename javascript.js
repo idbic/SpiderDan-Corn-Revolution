@@ -1,6 +1,9 @@
 // defining variables for the canvas element. 
 console.log('hellp')
 let hero;
+let corn; 
+let redbull;
+
 
 let game = document.querySelector('#game')
 console.log(game)
@@ -26,16 +29,12 @@ class Hero {
     
 }
 
-window.addEventListener('DOMContentLoaded', (function (){
-    hero = new Hero(10, 20, "#870a66", 20, 20);
-    
 
-    console.log(hero);
-})())
 // used codealong to get some js going. I know I will have to modify this but I wanted to start
 
 window.addEventListener("DOMContentLoaded", function (e){
-    hero = new Hero(10, 20, "#870a66", 20, 20);
+    hero = new Hero(325, 750, "#870a66", 20, 20);
+    corn = new Hero(null, 10, "#ffff00", 250, 75);
     
     
     const runGame = setInterval(gameLoop, 120);
@@ -50,6 +49,7 @@ function gameLoop(){
     // }
 
     hero.render();
+    corn.render();
 }
 
 function movementHandler(e){
@@ -85,3 +85,15 @@ document.addEventListener("keydown", movementHandler);
 
 game.width = 650
 game.height = 850
+
+//render falling objects using modifying lecture function
+
+function fallingCorn() {
+    corn.alive = false;
+    setTimeout(function(){
+        let x = Math.floor(Math.random() * game.width) - 40;
+        let y = 10
+        corn = new Hero(x, y, "#ffff00", 250, 75)
+    }, 1000)
+    return true;
+}
