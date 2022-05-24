@@ -3,6 +3,7 @@ console.log('hellp')
 let hero;
 let corn; 
 let redbull;
+let anudaCorn;
 
 
 let game = document.querySelector('#game')
@@ -40,12 +41,13 @@ class Hero {
 // used codealong to get some js going. I know I will have to modify this but I wanted to start
 
 window.addEventListener("DOMContentLoaded", function (e){
-    hero = new Hero(325, 750, "#870a66", 20, 20);
+    hero = new Hero(325, 750, "#870a66", 60, 90);
     corn = new Hero(null, 10, "#ffff00", 250, 75);
+    anudaCorn = new Hero(350, 10, "#ffff00", 250, 75)
     
     
     const runGame = setInterval(gameLoop, 120);
-})
+}) 
 
 function gameLoop(){
     ctx.clearRect(0, 0, game.width, game.height);
@@ -58,6 +60,11 @@ function gameLoop(){
     hero.render();
     corn.render();
     corn.move();
+    anudaCorn.render();
+    anudaCorn.move();
+    reCornGen();
+    reAnudaCornGen();
+    
 }
 //added the corn move method/function 
 function movementHandler(e){
@@ -66,16 +73,16 @@ function movementHandler(e){
     switch (e.key){
         case "ArrowUp":
             
-            hero.y > 0 ?  hero.y -= 10  :  null;
+            hero.y > 0 ?  hero.y -= 50  :  null;
             break
         case "ArrowDown":
-            hero.y < (game.height - hero.height) ? hero.y += 10 : null;
+            hero.y < (game.height - hero.height) ? hero.y += 50 : null;
             break
         case "ArrowLeft":
-            hero.x > 0 ? hero.x -= 10 : null;
+            hero.x > 0 ? hero.x -= 50 : null;
             break
         case "ArrowRight":
-            hero.x < (game.width - hero.width) ? hero.x += 10 : null;
+            hero.x < (game.width - hero.width) ? hero.x += 50 : null;
             break
         // case "mousemove":
         //     hero.x < (game.width - hero.width) ? hero.x += 10 : null;
@@ -95,15 +102,27 @@ game.width = 650
 game.height = 850
 
 //render falling objects using modifying lecture function
-
-function fallingCornGen() {
+//added a conditional to joels newshrek (im back on my bs)
+function reCornGen() {
+    if(corn.y === 850){
     corn.alive = false;
     setTimeout(function(){
         let x = Math.floor(Math.random() * game.width) - 40;
         let y = 10
         corn = new Hero(x, y, "#ffff00", 250, 75)
     }, 1000)
-    return true;
+    return true;}
 
 }
 
+function reAnudaCornGen() {
+    if(corn.y === 850) {
+        anudaCorn.alive = false;
+    setTimeout(function(){
+        let x = Math.floor(Math.random() * game.width) - 40;
+        let y = 10
+        anudaCorn = new Hero(x, y, "#ffff00", 250, 75)
+    }, 1000)
+    return true;}
+
+}
