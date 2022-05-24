@@ -6,8 +6,8 @@ let game = document.querySelector('#game')
 console.log(game)
 let ctx = game.getContext('2d')
 console.log(ctx)
-game.setAttribute("width", getComputedStyle(game)['width']);
-game.setAttribute("height", getComputedStyle(game)['height']);
+game.setAttribute("width", getComputedStyle(game)['400']);
+game.setAttribute("height", getComputedStyle(game)['1000']);
 
 class Hero {
     constructor(x, y, color, width, height) {
@@ -80,3 +80,8 @@ function movementHandler(e){
 
 document.addEventListener("keydown", movementHandler);
 // document.addEventListener("mousemove", movementHandler);
+
+//setting height and width of canvas element 
+
+game.width = 650
+game.height = 850
