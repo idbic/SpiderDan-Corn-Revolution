@@ -8,6 +8,7 @@ let thirdCorn;
 let health;
 let gameRunning = false;
 let startButton;
+
 //created start button variable
 //added a game running variable and I am going to create a func to change variable for start button and game end
 
@@ -40,6 +41,9 @@ class Hero {
     		this.x = (Math.random() * 250);
     	}
   	}
+      clear(){
+        ctx.clearRect(0, 0, game.width, game.height);
+      }
 }
 
 
@@ -59,11 +63,11 @@ window.addEventListener("DOMContentLoaded", function (e){
 function gameLoop(){
     if(gameRunning === true){
     ctx.clearRect(0, 0, game.width, game.height);
-
+    
 
 //created health bar
     
-    health.render();
+    // health.render();
     hero.render();
     corn.render();
     corn.move();
@@ -76,9 +80,8 @@ function gameLoop(){
     thirdCornRegen();
     detectHit(hero, corn, anudaCorn, thirdCorn);
     } else {
-        console.log('game not running')
-        startButton.render();
         
+        startButton.render();
     }
 }
 window.addEventListener('click', function(){
@@ -116,8 +119,8 @@ document.addEventListener("keydown", movementHandler);
 
 //setting height and width of canvas element 
 
-game.width = 650
 game.height = 850
+game.width = 650
 
 //render falling objects using modifying lecture function
 //added a conditional to joels newshrek (im back on my bs)
@@ -164,7 +167,7 @@ function thirdCornRegen(){
 }
 //hit detection for all corn classes
 function detectHit(p1, p2, p3, p4){
-    let healthCount = 100;
+    
 
     let hitTest =
         p1.y + p1.height > p2.y &&
@@ -181,20 +184,18 @@ function detectHit(p1, p2, p3, p4){
         p1.x < p4.x + p4.width // {boolean} : if all are true -> hit
 
     if (hitTest){
-        healthCount = healthCount - 80;
-        console.log(healthCount)
-       if(healthCount === 20) {
-            health = new Hero(475, 20, "#ff0000", 30, 20)
-        }
-        console.log('hit');
-        gameRunning = false;
+        location.reload();
+        window.alert('Game Over You Stupid Bitch')
+        
+        
+        
+    
         
     } else{
         
         return false;
-    }
+    } 
 }
-//creating a function to take away health on hit
 
 
 
