@@ -8,6 +8,7 @@ let thirdCorn;
 let health;
 let gameRunning = false;
 let startButton;
+let score = 0;
 
 //created start button variable
 //added a game running variable and I am going to create a func to change variable for start button and game end
@@ -85,6 +86,9 @@ function gameLoop() {
         detectHit(hero, corn, anudaCorn, thirdCorn);
         collect();
         detectHitCollect(hero, redbull);
+        winna();
+
+       
     } else {
 
         startButton.render();
@@ -220,7 +224,7 @@ function collect() {
         return true;
     }
 }
-let score = 0
+
 function detectHitCollect(uno, dos) {
     
     let daBull =
@@ -234,5 +238,15 @@ function detectHitCollect(uno, dos) {
         return console.log(score);
     } else {
         return false;
+    }
+}
+
+//create a win function
+
+function winna(){
+    if (score === 250) {
+        location.reload();
+        window.alert('You win you stupid mother fucker!');
+        
     }
 }
