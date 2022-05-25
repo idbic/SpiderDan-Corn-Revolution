@@ -1,7 +1,7 @@
 // defining variables for the canvas element. 
 console.log('hellp')
 let hero;
-let corn; 
+let corn;
 let redbull;
 let anudaCorn;
 let thirdCorn;
@@ -23,78 +23,84 @@ class Hero {
     constructor(x, y, color, width, height) {
         this.x = x;
         this.y = y;
-        this.color = color; 
-        this.height = height; 
-        this.width = width; 
-        this.alive = true; 
+        this.color = color;
+        this.height = height;
+        this.width = width;
+        this.alive = true;
         this.speed = 3;
     }
-// added this.speed and jergins move function to this class
-    render(){
+    // added this.speed and jergins move function to this class
+    render() {
         ctx.fillStyle = this.color;
         ctx.fillRect(this.x, this.y, this.width, this.height)
     }
     move() {
-		this.y += this.speed;
-    	if(this.y === 1000){
-    		this.y = 0
-    		this.x = (Math.random() * 250);
-    	}
-  	}
-      clear(){
+        this.y += this.speed;
+        if (this.y === 1000) {
+            this.y = 0
+            this.x = (Math.random() * 250);
+        }
+    }
+    clear() {
         ctx.clearRect(0, 0, game.width, game.height);
-      }
+    }
 }
+//adding collectibles
 
 
 // used codealong to get some js going. I know I will have to modify this but I wanted to start
 
-window.addEventListener("DOMContentLoaded", function (e){
+window.addEventListener("DOMContentLoaded", function (e) {
     hero = new Hero(325, 750, "#870a66", 30, 45);
     corn = new Hero(null, 10, "#ffff00", 200, 75);
     anudaCorn = new Hero(350, 10, "#ffff00", 5, 75);
     thirdCorn = new Hero(150, 10, "#ffff00", 250, 75);
     health = new Hero(475, 20, "#ff0000", 150, 20);
     startButton = new Hero(300, 380, "#ffff00", 90, 45);
-    
+    redbull = new Hero(350, 0, '#abed15', 75, 75)
     const runGame = setInterval(gameLoop, 8);
-}) 
+})
 
-function gameLoop(){
-    if(gameRunning === true){
-    ctx.clearRect(0, 0, game.width, game.height);
-    
+function gameLoop() {
+    if (gameRunning === true) {
+        ctx.clearRect(0, 0, game.width, game.height);
 
-//created health bar
-    
-    // health.render();
-    hero.render();
-    corn.render();
-    corn.move();
-    anudaCorn.render()
-    anudaCorn.move();
-    thirdCorn.render();
-    thirdCorn.move()
-    reCornGen();
-    reAnudaCornGen();
-    thirdCornRegen();
-    detectHit(hero, corn, anudaCorn, thirdCorn);
+
+        //created health bar
+
+        // health.render();
+
+        redbull.render();
+        redbull.move();
+        hero.render();
+        corn.render();
+        corn.move();
+        anudaCorn.render()
+        anudaCorn.move();
+        thirdCorn.render();
+        thirdCorn.move()
+        reCornGen();
+        reAnudaCornGen();
+        thirdCornRegen();
+        detectHit(hero, corn, anudaCorn, thirdCorn);
+        collect();
+        detectHitCollect(hero, redbull);
     } else {
-        
+
         startButton.render();
     }
 }
-window.addEventListener('click', function(){
+window.addEventListener('click', function () {
     gameRunning = true;
-}) 
+})
 //added the corn move method/function 
-function movementHandler(e){
+function movementHandler(e) {
     console.log("the key that was pressed was: " + e.key);
 
-    switch (e.key){
+    switch (e.key) {
         case "ArrowUp":
-            
-            hero.y > 0 ?  hero.y -= 50  :  null;
+
+            hero.y > 0 ? hero.y -= 50 : null;
             break
         case "ArrowDown":
             hero.y < (game.height - hero.height) ? hero.y += 50 : null;
@@ -132,42 +138,45 @@ function reCornGen() {
     //         corn = new Hero(x, y, "#ffff00", 225, 75)
     //     }, 1000)   
     // } else 
-    if(corn.y === 900){
-    corn.alive = false;
-    setTimeout(function(){
-        let x = Math.floor(Math.random() * game.width) - 200;
-        let y = 0
-        corn = new Hero(x, y, "#ffff00", 225, 75)
-    }, 1000)
-    return true;}
+    if (corn.y === 900) {
+        corn.alive = false;
+        setTimeout(function () {
+            let x = Math.floor(Math.random() * game.width) - 200;
+            let y = 0
+            corn = new Hero(x, y, "#ffff00", 225, 75)
+        }, 1000)
+        return true;
+    }
 
 }
 
 function reAnudaCornGen() {
-    if(anudaCorn.y === 900) {
+    if (anudaCorn.y === 900) {
         anudaCorn.alive = false;
-    setTimeout(function(){
-        let x = Math.floor(Math.random() * game.width) - 200;
-        let y = 0
-        anudaCorn = new Hero(x, y, "#ffff00", 200, 75)
-    }, 2000)
-    return true;}
+        setTimeout(function () {
+            let x = Math.floor(Math.random() * game.width) - 200;
+            let y = 0
+            anudaCorn = new Hero(x, y, "#ffff00", 200, 75)
+        }, 2000)
+        return true;
+    }
 
 }
 
-function thirdCornRegen(){
-    if(thirdCorn.y === 900) {
+function thirdCornRegen() {
+    if (thirdCorn.y === 900) {
         thirdCorn.alive = false;
-    setTimeout(function(){
-        let x = Math.floor(Math.random() * game.width) - 200;
-        let y = 0
-        thirdCorn = new Hero(x, y, "#ffff00", 175, 75)
-    }, 1000)
-    return true;}
+        setTimeout(function () {
+            let x = Math.floor(Math.random() * game.width) - 200;
+            let y = 0
+            thirdCorn = new Hero(x, y, "#ffff00", 175, 75)
+        }, 1000)
+        return true;
+    }
 }
 //hit detection for all corn classes
-function detectHit(p1, p2, p3, p4){
-    
+function detectHit(p1, p2, p3, p4) {
+
 
     let hitTest =
         p1.y + p1.height > p2.y &&
@@ -183,19 +192,47 @@ function detectHit(p1, p2, p3, p4){
         p1.x + p1.width > p4.x &&
         p1.x < p4.x + p4.width // {boolean} : if all are true -> hit
 
-    if (hitTest){
+    if (hitTest) {
         location.reload();
         window.alert('Game Over You Stupid Bitch')
-        
-        
-        
-    
-        
-    } else{
-        
+
+
+
+
+
+    } else {
+
         return false;
-    } 
+    }
 }
 
 
+//collectibles function
 
+function collect() {
+    if (redbull.y === 900) {
+        redbull.alive = false;
+        setTimeout(function () {
+            let x = Math.floor(Math.random() * game.width) - 200;
+            let y = 0
+            redbull = new Hero(x, y, "#abed15", 75, 75)
+        }, 10000)
+        return true;
+    }
+}
+let score = 0
+function detectHitCollect(uno, dos) {
+    
+    let daBull =
+        uno.y + uno.height > dos.y &&
+        uno.y < dos.y + dos.height &&
+        uno.x + uno.width > dos.x &&
+        uno.x < dos.x + dos.width; // {boolean} : if all are true -> hit
+
+    if (daBull) {
+        score = score + 1
+        return console.log(score);
+    } else {
+        return false;
+    }
+}
