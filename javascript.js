@@ -42,8 +42,8 @@ class Hero {
 // used codealong to get some js going. I know I will have to modify this but I wanted to start
 
 window.addEventListener("DOMContentLoaded", function (e){
-    hero = new Hero(325, 750, "#870a66", 30, 90);
-    corn = new Hero(null, 10, "#ffff00", 250, 75);
+    hero = new Hero(325, 750, "#870a66", 30, 45);
+    corn = new Hero(null, 10, "#ffff00", 200, 75);
     anudaCorn = new Hero(350, 10, "#ffff00", 5, 75);
     thirdCorn = new Hero(150, 10, "#ffff00", 250, 75);
     
@@ -69,6 +69,7 @@ function gameLoop(){
     reCornGen();
     reAnudaCornGen();
     thirdCornRegen();
+    detectHit(hero, corn, anudaCorn, thirdCorn);
     
 }
 //added the corn move method/function 
@@ -141,4 +142,27 @@ function thirdCornRegen(){
         thirdCorn = new Hero(x, y, "#ffff00", 175, 75)
     }, 1000)
     return true;}
+}
+//hit detection for all corn classes
+function detectHit(p1, p2, p3, p4){
+    let hitTest =
+        p1.y + p1.height > p2.y &&
+        p1.y < p2.y + p2.height &&
+        p1.x + p1.width > p2.x &&
+        p1.x < p2.x + p2.width ||
+        p1.y + p1.height > p3.y &&
+        p1.y < p3.y + p3.height &&
+        p1.x + p1.width > p3.x &&
+        p1.x < p3.x + p3.width ||
+        p1.y + p1.height > p4.y &&
+        p1.y < p4.y + p4.height &&
+        p1.x + p1.width > p4.x &&
+        p1.x < p4.x + p4.width; // {boolean} : if all are true -> hit
+
+    if (hitTest){
+        console.log('hit');
+    } else{
+        
+        return false;
+    }
 }
