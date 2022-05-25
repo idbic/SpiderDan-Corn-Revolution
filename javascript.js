@@ -5,7 +5,11 @@ let corn;
 let redbull;
 let anudaCorn;
 let thirdCorn;
-
+let health;
+let gameRunning = false;
+let startButton;
+//created start button variable
+//added a game running variable and I am going to create a func to change variable for start button and game end
 
 let game = document.querySelector('#game')
 console.log(game)
@@ -46,19 +50,17 @@ window.addEventListener("DOMContentLoaded", function (e){
     corn = new Hero(null, 10, "#ffff00", 200, 75);
     anudaCorn = new Hero(350, 10, "#ffff00", 5, 75);
     thirdCorn = new Hero(150, 10, "#ffff00", 250, 75);
-    health = new Hero(475, 20, "#ff0000", 150, 20)
+    health = new Hero(475, 20, "#ff0000", 150, 20);
+    startButton = new Hero(300, 380, "#ffff00", 90, 45);
     
     const runGame = setInterval(gameLoop, 8);
 }) 
 
 function gameLoop(){
-    
+    if(gameRunning === true){
     ctx.clearRect(0, 0, game.width, game.height);
 
-    // if (shrek.alive){
-    //     shrek.render();
-    //     let hit = detectHit(hero, shrek);
-    // }
+
 //created health bar
     
     health.render();
@@ -72,9 +74,16 @@ function gameLoop(){
     reCornGen();
     reAnudaCornGen();
     thirdCornRegen();
-    // detectHit(hero, corn, anudaCorn, thirdCorn);
-    
+    detectHit(hero, corn, anudaCorn, thirdCorn);
+    } else {
+        console.log('game not running')
+        startButton.render();
+        
+    }
 }
+window.addEventListener('click', function(){
+    gameRunning = true;
+}) 
 //added the corn move method/function 
 function movementHandler(e){
     console.log("the key that was pressed was: " + e.key);
@@ -113,6 +122,13 @@ game.height = 850
 //render falling objects using modifying lecture function
 //added a conditional to joels newshrek (im back on my bs)
 function reCornGen() {
+    // if(corn.alive === false){
+    //     setTimeout(function(){
+    //         let x = Math.floor(Math.random() * game.width) - 200;
+    //         let y = 0
+    //         corn = new Hero(x, y, "#ffff00", 225, 75)
+    //     }, 1000)   
+    // } else 
     if(corn.y === 900){
     corn.alive = false;
     setTimeout(function(){
@@ -148,6 +164,8 @@ function thirdCornRegen(){
 }
 //hit detection for all corn classes
 function detectHit(p1, p2, p3, p4){
+    let healthCount = 100;
+
     let hitTest =
         p1.y + p1.height > p2.y &&
         p1.y < p2.y + p2.height &&
@@ -160,12 +178,23 @@ function detectHit(p1, p2, p3, p4){
         p1.y + p1.height > p4.y &&
         p1.y < p4.y + p4.height &&
         p1.x + p1.width > p4.x &&
-        p1.x < p4.x + p4.width; // {boolean} : if all are true -> hit
+        p1.x < p4.x + p4.width // {boolean} : if all are true -> hit
 
     if (hitTest){
+        healthCount = healthCount - 80;
+        console.log(healthCount)
+       if(healthCount === 20) {
+            health = new Hero(475, 20, "#ff0000", 30, 20)
+        }
         console.log('hit');
+        gameRunning = false;
+        
     } else{
         
         return false;
     }
 }
+//creating a function to take away health on hit
+
+
+
