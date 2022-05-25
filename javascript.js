@@ -46,6 +46,7 @@ window.addEventListener("DOMContentLoaded", function (e){
     corn = new Hero(null, 10, "#ffff00", 200, 75);
     anudaCorn = new Hero(350, 10, "#ffff00", 5, 75);
     thirdCorn = new Hero(150, 10, "#ffff00", 250, 75);
+    health = new Hero(475, 20, "#ff0000", 150, 20)
     
     const runGame = setInterval(gameLoop, 8);
 }) 
@@ -58,7 +59,9 @@ function gameLoop(){
     //     shrek.render();
     //     let hit = detectHit(hero, shrek);
     // }
-
+//created health bar
+    
+    health.render();
     hero.render();
     corn.render();
     corn.move();
@@ -69,7 +72,7 @@ function gameLoop(){
     reCornGen();
     reAnudaCornGen();
     thirdCornRegen();
-    detectHit(hero, corn, anudaCorn, thirdCorn);
+    // detectHit(hero, corn, anudaCorn, thirdCorn);
     
 }
 //added the corn move method/function 
