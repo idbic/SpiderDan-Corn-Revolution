@@ -18,6 +18,8 @@ let rbPic = new Image();
 rbPic.src = "redlogo.png"
 let building = new Image();
 building.src = "building.jpg"
+let startSMAN = new Image();
+startSMAN.src = "devspiderman.png";
 //created start button variable
 //added a game running variable and I am going to create a func to change variable for start button and game end
 
@@ -111,6 +113,7 @@ function gameLoop() {
        
     } else {
         ctx.drawImage(building, 0, 0, 650, 850)
+        ctx.drawImage(startSMAN, 250, 85, 250, 300)
         startButton.render();
         
     }
