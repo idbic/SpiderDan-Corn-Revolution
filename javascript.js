@@ -9,7 +9,8 @@ let health;
 let gameRunning = false;
 let startButton;
 let score = 0;
-
+let scoreCounter = document.getElementById('scoreCounter')
+let cornPic;
 //created start button variable
 //added a game running variable and I am going to create a func to change variable for start button and game end
 
@@ -34,6 +35,7 @@ class Hero {
     render() {
         ctx.fillStyle = this.color;
         ctx.fillRect(this.x, this.y, this.width, this.height)
+        
     }
     move() {
         this.y += this.speed;
@@ -68,9 +70,11 @@ function gameLoop() {
 
 
         //created health bar
+        //removed health bar because it was counting every pixel as a hit
+
 
         // health.render();
-
+        
         redbull.render();
         redbull.move();
         hero.render();
@@ -234,8 +238,11 @@ function detectHitCollect(uno, dos) {
         uno.x < dos.x + dos.width; // {boolean} : if all are true -> hit
 
     if (daBull) {
+        redbull.alive = false;
         score = score + 1
+        scoreCounter.innerText = score
         return console.log(score);
+        
     } else {
         return false;
     }
