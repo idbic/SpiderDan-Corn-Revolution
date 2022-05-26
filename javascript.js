@@ -20,6 +20,10 @@ let building = new Image();
 building.src = "building.jpg"
 let startSMAN = new Image();
 startSMAN.src = "devspiderman.png";
+let startCorn = new Image();
+startCorn.src = "startcorn.png"
+let face = new Image();
+face.src = "lol.png"
 //created start button variable
 //added a game running variable and I am going to create a func to change variable for start button and game end
 
@@ -73,7 +77,7 @@ window.addEventListener("DOMContentLoaded", function (e) {
     anudaCorn = new Hero(350, 10, "#ffff00", 5, 75, cornPic);
     thirdCorn = new Hero(150, 10, "#ffff00", 250, 75, cornPic);
     
-    startButton = new Hero(150, 380, "#ffff00", 400, 150, cornPic);
+    startButton = new Hero(150, 380, "#ffff00", 400, 150, startCorn);
     redbull = new Hero(500, -500, '#ffffff', 75, 75, rbPic)
     const runGame = setInterval(gameLoop, 8);
     
@@ -113,7 +117,8 @@ function gameLoop() {
        
     } else {
         ctx.drawImage(building, 0, 0, 650, 850)
-        ctx.drawImage(startSMAN, 250, 85, 250, 300)
+        ctx.drawImage(startSMAN, 250, 85, 250, 300);
+        ctx.drawImage(face, 335, 80, 75, 90)
         startButton.render();
         
     }
