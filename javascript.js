@@ -6,7 +6,7 @@ let redbull;
 let anudaCorn;
 let thirdCorn;
 let health;
-let gameRunning = false;
+let gameRunning = 2;
 let startButton;
 let score = 0;
 let scoreCounter = document.getElementById('scoreCounter')
@@ -15,15 +15,26 @@ cornPic.src = "closecorn.jpeg";
 let spiderDan = new Image();
 spiderDan.src = "spiderman.png"
 let rbPic = new Image();
-rbPic.src = "redlogo.png"
+rbPic.src = "squareBryn.jpg"
 let building = new Image();
-building.src = "building.jpg"
+building.src = "build.jpg"
 let startSMAN = new Image();
 startSMAN.src = "devspiderman.png";
 let startCorn = new Image();
 startCorn.src = "startcorn.png"
-let face = new Image();
-face.src = "lol.png"
+
+let woman = new Image();
+woman.src = "brynlin.png"
+
+let gameOver = new Image();
+gameOver.src = "gameover.png"
+
+let winImg = new Image();
+winImg.src = "winner.png"
+
+let instruct = new Image();
+instruct.src = "instruct.png"
+
 //created start button variable
 //added a game running variable and I am going to create a func to change variable for start button and game end
 
@@ -72,13 +83,13 @@ class Hero {
 // used codealong to get some js going. I know I will have to modify this but I wanted to start
 
 window.addEventListener("DOMContentLoaded", function (e) {
-    hero = new Hero(325, 750, "#000000", 25, 35, spiderDan);
+    hero = new Hero(325, 750, "#000000", 50, 60, startSMAN);
     corn = new Hero(null, 10, "#ffff00", 200, 75, cornPic);
     anudaCorn = new Hero(350, 10, "#ffff00", 5, 75, cornPic);
     thirdCorn = new Hero(150, 10, "#ffff00", 250, 75, cornPic);
     
-    startButton = new Hero(150, 380, "#ffff00", 400, 150, startCorn);
-    redbull = new Hero(500, -500, '#ffffff', 75, 75, rbPic)
+    startButton = new Hero(125, 380, "#ffff00", 400, 150, startCorn);
+    redbull = new Hero(500, -500, null, 100, 100, rbPic)
     const runGame = setInterval(gameLoop, 8);
     
 })
@@ -86,7 +97,7 @@ window.addEventListener("DOMContentLoaded", function (e) {
 
 
 function gameLoop() {
-    if (gameRunning === true) {
+    if (gameRunning === 1) {
         ctx.clearRect(0, 0, game.width, game.height);
 
 
@@ -115,16 +126,25 @@ function gameLoop() {
         winna();
 
        
-    } else {
+    } else if(gameRunning === 2){
         ctx.drawImage(building, 0, 0, 650, 850)
-        ctx.drawImage(startSMAN, 250, 85, 250, 300);
-        ctx.drawImage(face, 335, 80, 75, 90)
+        ctx.drawImage(startSMAN, 350, 95, 250, 300);
+        ctx.drawImage(instruct, -150, 350, 825, 650)
+        ctx.drawImage(woman, 100, 120, 250, 285)
         startButton.render();
+       
         
+        
+    } else if(gameRunning === 3){}
+    else if(gameRunning === 4){
+        ctx.drawImage(winner, 300, 300, 100, 500)
+        document.addEventListener('click', function(){
+            location.reload()
+        })
     }
 }
 window.addEventListener('click', function () {
-    gameRunning = true;
+    gameRunning = 1;
 })
 //added the corn move method/function 
 function movementHandler(e) {
@@ -226,8 +246,21 @@ function detectHit(p1, p2, p3, p4) {
         p1.x < p4.x + p4.width // {boolean} : if all are true -> hit
 
     if (hitTest) {
-        location.reload();
-        window.alert('Game Over You Stupid Bitch')
+        
+       gameRunning = 3;
+       ctx.drawImage(gameOver, 20, 350, 600, 200);
+       document.addEventListener('click', function(){
+           location.reload()
+       })
+    //    function (e){
+
+    //    }
+    //    document.addEventListener("click", location.reload());
+      
+
+        
+        // location.reload();
+        // window.alert('Game Over You Stupid Bitch')
 
 
 
@@ -277,8 +310,14 @@ function detectHitCollect(uno, dos) {
 
 function winna(){
     if (score === 250) {
-        location.reload();
-        window.alert('You win you stupid mother fucker!');
+        gameRunning = 4;
+        ctx.drawImage(winImg, 20, 350, 600, 200);
+       document.addEventListener('click', function(){
+           location.reload()
+       })
+        // location.reload();
+        // window.alert('You win you stupid mother fucker!');
         
     }
 }
+console.log(gameRunning)
