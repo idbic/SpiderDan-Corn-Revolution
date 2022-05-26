@@ -15,7 +15,7 @@ cornPic.src = "closecorn.jpeg";
 let spiderDan = new Image();
 spiderDan.src = "spiderman.png"
 let rbPic = new Image();
-rbPic.src = "redbull.png"
+rbPic.src = "redlogo.png"
 let building = new Image();
 building.src = "building.jpg"
 //created start button variable
@@ -72,7 +72,7 @@ window.addEventListener("DOMContentLoaded", function (e) {
     thirdCorn = new Hero(150, 10, "#ffff00", 250, 75, cornPic);
     
     startButton = new Hero(150, 380, "#ffff00", 400, 150, cornPic);
-    redbull = new Hero(500, -500, '#abed15', 75, 75, rbPic)
+    redbull = new Hero(500, -500, '#ffffff', 75, 75, rbPic)
     const runGame = setInterval(gameLoop, 8);
     
 })
@@ -240,7 +240,7 @@ function collect() {
         setTimeout(function () {
             let x = Math.floor(Math.random() * game.width) - 200;
             let y = 0
-            redbull = new Hero(x, y, "#abed15", 75, 75, rbPic)
+            redbull = new Hero(x, y, "#ffffff", 75, 75, rbPic)
         }, 10000)
         return true;
     }
