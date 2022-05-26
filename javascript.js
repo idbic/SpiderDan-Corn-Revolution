@@ -10,7 +10,14 @@ let gameRunning = false;
 let startButton;
 let score = 0;
 let scoreCounter = document.getElementById('scoreCounter')
-let cornPic;
+let cornPic = new Image();
+cornPic.src = "closecorn.jpeg";
+let spiderDan = new Image();
+spiderDan.src = "spiderman.png"
+let rbPic = new Image();
+rbPic.src = "redbull.png"
+let building = new Image();
+building.src = "building.jpg"
 //created start button variable
 //added a game running variable and I am going to create a func to change variable for start button and game end
 
@@ -22,7 +29,7 @@ game.setAttribute("width", getComputedStyle(game)['400']);
 game.setAttribute("height", getComputedStyle(game)['1000']);
 
 class Hero {
-    constructor(x, y, color, width, height) {
+    constructor(x, y, color, width, height, img) {
         this.x = x;
         this.y = y;
         this.color = color;
@@ -30,12 +37,13 @@ class Hero {
         this.width = width;
         this.alive = true;
         this.speed = 3;
+        this.img = img;
     }
     // added this.speed and jergins move function to this class
     render() {
         ctx.fillStyle = this.color;
         ctx.fillRect(this.x, this.y, this.width, this.height)
-        
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
     }
     move() {
         this.y += this.speed;
@@ -46,6 +54,10 @@ class Hero {
     }
     clear() {
         ctx.clearRect(0, 0, game.width, game.height);
+        
+    }
+    draw(pic, x, y, xs, ys) {
+        ctx.drawImage(pic, x, y, xs, ys)
     }
 }
 //adding collectibles
@@ -54,15 +66,18 @@ class Hero {
 // used codealong to get some js going. I know I will have to modify this but I wanted to start
 
 window.addEventListener("DOMContentLoaded", function (e) {
-    hero = new Hero(325, 750, "#870a66", 30, 45);
-    corn = new Hero(null, 10, "#ffff00", 200, 75);
-    anudaCorn = new Hero(350, 10, "#ffff00", 5, 75);
-    thirdCorn = new Hero(150, 10, "#ffff00", 250, 75);
-    health = new Hero(475, 20, "#ff0000", 150, 20);
-    startButton = new Hero(300, 380, "#ffff00", 90, 45);
-    redbull = new Hero(350, 0, '#abed15', 75, 75)
+    hero = new Hero(325, 750, "#000000", 25, 35, spiderDan);
+    corn = new Hero(null, 10, "#ffff00", 200, 75, cornPic);
+    anudaCorn = new Hero(350, 10, "#ffff00", 5, 75, cornPic);
+    thirdCorn = new Hero(150, 10, "#ffff00", 250, 75, cornPic);
+    
+    startButton = new Hero(150, 380, "#ffff00", 400, 150, cornPic);
+    redbull = new Hero(500, -500, '#abed15', 75, 75, rbPic)
     const runGame = setInterval(gameLoop, 8);
+    
 })
+
+
 
 function gameLoop() {
     if (gameRunning === true) {
@@ -74,12 +89,13 @@ function gameLoop() {
 
 
         // health.render();
-        
+        ctx.drawImage(building, 0, 0, 650, 850)
         redbull.render();
         redbull.move();
         hero.render();
         corn.render();
         corn.move();
+        
         anudaCorn.render()
         anudaCorn.move();
         thirdCorn.render();
@@ -94,8 +110,9 @@ function gameLoop() {
 
        
     } else {
-
+        ctx.drawImage(building, 0, 0, 650, 850)
         startButton.render();
+        
     }
 }
 window.addEventListener('click', function () {
@@ -151,7 +168,7 @@ function reCornGen() {
         setTimeout(function () {
             let x = Math.floor(Math.random() * game.width) - 200;
             let y = 0
-            corn = new Hero(x, y, "#ffff00", 225, 75)
+            corn = new Hero(x, y, "#ffff00", 225, 75, cornPic)
         }, 1000)
         return true;
     }
@@ -164,7 +181,7 @@ function reAnudaCornGen() {
         setTimeout(function () {
             let x = Math.floor(Math.random() * game.width) - 200;
             let y = 0
-            anudaCorn = new Hero(x, y, "#ffff00", 200, 75)
+            anudaCorn = new Hero(x, y, "#ffff00", 200, 75, cornPic)
         }, 2000)
         return true;
     }
@@ -177,7 +194,7 @@ function thirdCornRegen() {
         setTimeout(function () {
             let x = Math.floor(Math.random() * game.width) - 200;
             let y = 0
-            thirdCorn = new Hero(x, y, "#ffff00", 175, 75)
+            thirdCorn = new Hero(x, y, "#ffff00", 175, 75, cornPic)
         }, 1000)
         return true;
     }
@@ -223,7 +240,7 @@ function collect() {
         setTimeout(function () {
             let x = Math.floor(Math.random() * game.width) - 200;
             let y = 0
-            redbull = new Hero(x, y, "#abed15", 75, 75)
+            redbull = new Hero(x, y, "#abed15", 75, 75, rbPic)
         }, 10000)
         return true;
     }
