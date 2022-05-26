@@ -296,7 +296,8 @@ function detectHitCollect(uno, dos) {
         uno.x < dos.x + dos.width; // {boolean} : if all are true -> hit
 
     if (daBull) {
-        redbull.alive = false;
+        
+        collect();
         score = score + 1
         scoreCounter.innerText = score
         return console.log(score);
