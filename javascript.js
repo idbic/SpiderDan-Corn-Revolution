@@ -174,6 +174,13 @@ function movementHandler(e) {
 }
 
 document.addEventListener("keydown", movementHandler);
+
+window.addEventListener("keydown", function(e) {
+    if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
+        e.preventDefault();
+    }
+}, false);
+
 // document.addEventListener("mousemove", movementHandler);
 
 //setting height and width of canvas element 
