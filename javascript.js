@@ -130,7 +130,11 @@ function gameLoop() {
         ctx.drawImage(building, 0, 0, 650, 850)
         ctx.drawImage(startSMAN, 350, 95, 250, 300);
         
+<<<<<<< HEAD
         ctx.drawImage(woman, 145, 105, 115, 285)
+=======
+        ctx.drawImage(woman, 130, 120, 150, 285)
+>>>>>>> main
         startButton.render();
        
         
