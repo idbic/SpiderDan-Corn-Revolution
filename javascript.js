@@ -15,7 +15,7 @@ cornPic.src = "closecorn.jpeg";
 let spiderDan = new Image();
 spiderDan.src = "spiderman.png"
 let rbPic = new Image();
-rbPic.src = "squareBryn.jpg"
+rbPic.src = "bang.png"
 let building = new Image();
 building.src = "build.jpg"
 let startSMAN = new Image();
@@ -24,7 +24,7 @@ let startCorn = new Image();
 startCorn.src = "startcorn.png"
 
 let woman = new Image();
-woman.src = "brynlin.png"
+woman.src = "bang.png"
 
 let gameOver = new Image();
 gameOver.src = "gameover.png"
@@ -89,7 +89,7 @@ window.addEventListener("DOMContentLoaded", function (e) {
     thirdCorn = new Hero(150, 10, "#ffff00", 250, 75, cornPic);
     
     startButton = new Hero(125, 380, "#ffff00", 400, 150, startCorn);
-    redbull = new Hero(500, -500, null, 100, 100, rbPic)
+    redbull = new Hero(500, -500, null, 50, 100, rbPic)
     const runGame = setInterval(gameLoop, 8);
     
 })
@@ -129,8 +129,8 @@ function gameLoop() {
     } else if(gameRunning === 2){
         ctx.drawImage(building, 0, 0, 650, 850)
         ctx.drawImage(startSMAN, 350, 95, 250, 300);
-        ctx.drawImage(instruct, -150, 350, 825, 650)
-        ctx.drawImage(woman, 100, 120, 250, 285)
+        
+        ctx.drawImage(woman, 130, 120, 150, 285)
         startButton.render();
        
         
